@@ -45,7 +45,7 @@ siteUrl.addEventListener("blur",DuplicateUrl)
 
 
 function DuplicateUrl(){
-    var duplicate=false;
+   var duplicate=false;
     for(var i=0;i<bookmark.length;i++){
         if(bookmark[i].url.toLowerCase()==siteUrl.value.toLowerCase()){
             D_email.classList.replace("d-none","d-flex")
@@ -57,7 +57,7 @@ function DuplicateUrl(){
     }
     return duplicate;
 }
- console.log()
+
 
 // Name Validation
 siteName.addEventListener("blur",CheckName)
