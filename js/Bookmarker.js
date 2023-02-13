@@ -7,7 +7,7 @@ var D_email=document.getElementById("D_email");
 var bookmark;
 
 // validation
-var UrlValid=/^(https:\/\/www\.[a-zA-Z0-9]{4,15}\.[a-zA-Z]{2,5}\.?[a-z]?[a-z]?[a-z]?\/?)+([a-z]{3,10}\/?)?/;
+var UrlValid=/^((https|HTTPS):\/\/(www|WWW)\.[a-zA-Z0-9]{4,15}\.[a-zA-Z]{2,5}\.?[a-z]?[a-z]?[a-z]?\/?)+([a-z]{3,10}\/?)?$/;
 var namevalid=/^[a-zA-Z0-9]{3,10}$/;
 
 
@@ -45,14 +45,19 @@ siteUrl.addEventListener("blur",DuplicateUrl)
 
 
 function DuplicateUrl(){
+    var duplicate=false;
     for(var i=0;i<bookmark.length;i++){
-        if(bookmark[i].url==siteUrl.value){
+        if(bookmark[i].url.toLowerCase()==siteUrl.value.toLowerCase()){
             D_email.classList.replace("d-none","d-flex")
-            return true;
+            duplicate=true;
+        }
+        else{
+            duplicate=false;
         }
     }
+    return duplicate;
 }
-
+ console.log()
 
 // Name Validation
 siteName.addEventListener("blur",CheckName)
@@ -77,7 +82,7 @@ function CheckName(){
 
 
 function addBookmark(){
-    if(checkUrl()==true && CheckName()==true && DuplicateUrl()!=true){
+    if(checkUrl()==true && CheckName()==true && DuplicateUrl()==false){
         var site={
             name:siteName.value,
             url:siteUrl.value
